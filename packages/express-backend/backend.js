@@ -81,8 +81,9 @@ app.use(express.json());
 
 app.post("/users", (req, res) => {	
   const userToAdd = req.body;
-  userToAdd.id = newId();	
-  res.status(201).send(addUser(userToAdd));
+  userToAdd.id = newId();
+  addUser(userToAdd);		
+  res.status(201).send(userToAdd);
 });
 
 app.get("/users/:id", (req, res) => {
@@ -126,7 +127,7 @@ app.delete("/users/:id", (req, res) => {
 	}
 	else {
 		removeUser(result);
-		res.send();
+		res.status(204).send();
 	}
 
 });
