@@ -1,4 +1,5 @@
 import express from "express";
+import cors from "cors";
 
 const app = express();
 const port = 8000;
@@ -58,6 +59,9 @@ return users["users_list"].filter(
 		(user) => user["job"] === job
 	);
 };
+
+app.use(cors());
+app.use(express.json());
 
 app.post("/users", (req, res) => {
   const userToAdd = req.body;
