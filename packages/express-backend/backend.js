@@ -60,13 +60,29 @@ return users["users_list"].filter(
 	);
 };
 
+function newId() {
+  const letters = 'abcdefghijklmnopqrstuvwxyz';
+  let randomString = '';
+
+  for (let i = 0; i < 3; i++) {
+    const randomIndex = Math.floor(Math.random() * letters.length);
+    randomString += letters[randomIndex];
+  }
+
+  for (let i = 0; i < 3; i++) {
+    randomString += Math.floor(Math.random() * 10);
+  }
+
+  return randomString;
+}
+
 app.use(cors());
 app.use(express.json());
 
-app.post("/users", (req, res) => {
+app.post("/users", (req, res) => {	
   const userToAdd = req.body;
-  addUser(userToAdd);
-  res.send();
+  userToAdd.id = newId();	
+  res.status(201).send(addUser(userToAdd));
 });
 
 app.get("/users/:id", (req, res) => {
