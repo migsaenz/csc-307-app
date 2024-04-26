@@ -6,12 +6,10 @@ function MyApp() {
   const [characters, setCharacters] = useState([]);
 
 function removeOneCharacter(index) {
-    const promise = fetch('http://localhost:8000/users/${characters[index].id}', {
+    let ID = characters[index].id;	
+    const promise = fetch(`http://localhost:8000/users/${ID}`, {
 	    method: "DELETE",});
-    const updated = characters.filter((character, i) => {
-      return i !== index;
-    });
-    setCharacters(updated);
+    return promise;	
   }  
 
 function fetchUsers() {
@@ -47,7 +45,8 @@ useEffect(() => {
 
 return (
     <div className="container">
-      <Table characterData={characters} 
+      <Table
+	characterData={characters} 
 	removeCharacter={removeOneCharacter}
 	/>
       <Form handleSubmit={updateList}/>

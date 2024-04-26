@@ -27,6 +27,7 @@ function TableBody(props) {
 	</td>
       </tr>
     );
+   console.log(row);
    }
   );
   return (

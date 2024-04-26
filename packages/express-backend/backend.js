@@ -9,9 +9,8 @@ app.use(express.json());
 
 app.post("/users", (req, res) => {	
   const userToAdd = req.body;
-  userToAdd.id = newId();
   mongo.addUser(userToAdd).then(res.status(201).send(userToAdd))
-	  .catch((error) => {console.log(error);});		
+	  .catch((error) => {console.log(error);});
 });
 
 app.get("/users/:id", (req, res) => {
@@ -42,6 +41,9 @@ app.delete("/users/:id", (req, res) => {
 	mongo.deleteUserById(id).then((result) => {
 		if(result === undefined){
 			res.status(404).send("Resource not found.");
+		}
+		else{
+			res.status(204).send();
 		}}).catch((error) => {console.log(error);});
 });
 
