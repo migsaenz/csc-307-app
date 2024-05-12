@@ -30,5 +30,3 @@ import mut from './module.js'; // MUT = Module Under Test
   test('returns false if text is empty', () => {
     expect(mut.containsNumbers('')).toBe(false);
   });
-
-//github push test
